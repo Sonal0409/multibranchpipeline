@@ -2,9 +2,7 @@ pipeline{
     
     agent any
     
-    parameters{
-        booleanParam(name: "Release", defaultValue: true)
-    }
+
     
     stages{
         
@@ -17,16 +15,10 @@ pipeline{
         
         stage('Release Code'){
             steps{
-               script {
-                   if(params.Release)
+            
                    {
                         echo "relase the code to artifactory"
-                   }
-                   else  
-                   {
-                         
-                           echo "pre-release activites"
-                   }
+                
                } 
                
               
