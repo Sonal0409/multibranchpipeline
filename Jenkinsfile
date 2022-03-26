@@ -4,17 +4,17 @@ pipeline{
     
     stages{
         
-        stage('Build Code')
+        stage('Smoke Testing')
         {
             steps{
-                sh 'echo "Build Code"'
+                sh 'echo "test Code"'
             }
         }
         
-        stage('Release Code'){
+        stage('Integration testing'){
             
           steps{
-                        echo "relase the code to artifactory"
+                        echo "test code as integration"
                    }
                 
                
