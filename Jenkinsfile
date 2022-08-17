@@ -16,14 +16,13 @@ pipeline{
         stage('Release Code'){
             steps{
             
-                   {
+                   
                         echo "relase the code to artifactory"
                 
                } 
                
-              
+            }
                 
             }
         }
-    }
-}
+   
