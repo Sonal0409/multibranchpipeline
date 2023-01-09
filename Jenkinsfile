@@ -1,28 +1,50 @@
 pipeline{
     
+    tools{
+        maven 'mymaven'
+        jdk 'myjava'
+    }
     agent any
-    
-
-    
     stages{
-        
-        stage('Build Code')
+        stage('Clone A Repo'){
+            steps{
+                git 'https://github.com/VenkataNarasimha19/DevOpsClassCodes.git'
+            }
+        }
+        stage('Compile the code')
         {
             steps{
-                sh 'echo "Build Code"'
+                sh 'mvn compile'
             }
         }
-        
-        stage('Release Code'){
+        stage('Code Review')
+        {
             steps{
-            
-                   
-                        echo "relase the code to artifactory"
-                
-               } 
-               
-            }
-                
+                sh 'mvn pmd:pmd'
             }
         }
-   
+        stage('Unit Test')
+        {
+            steps{
+                sh 'mvn test'
+            }
+            post{
+                success{
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }    
+        stage('package')
+        {
+            steps{
+                sh 'mvn package'
+            }
+            post{
+                success{
+                    jacoco()
+                }
+            }
+        }
+    }
+        
+}
